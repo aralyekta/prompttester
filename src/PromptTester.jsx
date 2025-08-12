@@ -14,9 +14,9 @@ import { runLLM } from './utils/llmClients';
 
 const PromptTester = () => {
   const [apiKeys, setApiKeys] = useState({
-    openai: '',
-    claude: '',
-    gemini: ''
+    openai: process.env.REACT_APP_OPENAI_API_KEY || '',
+    claude: process.env.REACT_APP_CLAUDE_API_KEY || '',
+    gemini: process.env.REACT_APP_GEMINI_API_KEY || ''
   });
   const [darkMode, setDarkMode] = useState(false);
   const [comparingScenarios, setComparingScenarios] = useState([]);

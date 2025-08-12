@@ -13,13 +13,30 @@ Test and compare LLM prompts across OpenAI, Claude, and Gemini with real-time co
 ## Quick Start
 
 ```bash
+# Install dependencies
 npm install
+
+# Copy and configure environment variables
+cp .env.example .env
+# Edit .env and add your API keys
+
+# Start the app
 npm start
 ```
 
-1. Add your API keys
+1. Configure API keys in `.env` file
 2. Create test scenarios
 3. Run and compare results
+
+## Configuration
+
+API keys are loaded from environment variables for security. Create a `.env` file based on `.env.example`:
+
+```
+REACT_APP_OPENAI_API_KEY=your-openai-key
+REACT_APP_CLAUDE_API_KEY=your-claude-key  
+REACT_APP_GEMINI_API_KEY=your-gemini-key
+```
 
 ## How It Works
 

@@ -10,6 +10,7 @@ const Input = ({
   error = false,
   className = '',
   darkMode = false,
+  readOnly = false,
   ...props 
 }) => {
   const themeStyles = getThemeStyles(darkMode);
@@ -25,7 +26,9 @@ const Input = ({
     color: themeStyles.text.primary,
     transition: theme.transitions.default,
     boxSizing: 'border-box',
-    outline: 'none'
+    outline: 'none',
+    cursor: readOnly ? 'not-allowed' : 'text',
+    opacity: readOnly ? 0.8 : 1
   };
 
   const focusStyles = {
@@ -53,6 +56,7 @@ const Input = ({
       onFocus={handleFocus}
       onBlur={handleBlur}
       disabled={disabled}
+      readOnly={readOnly}
       style={finalStyles}
       className={className}
       {...props}

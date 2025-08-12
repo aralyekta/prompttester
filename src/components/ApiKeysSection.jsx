@@ -163,10 +163,13 @@ const ApiKeysSection = ({ apiKeys, onApiKeyChange, requiredProviders, darkMode }
                 <Input
                   type="password"
                   value={apiKeys[provider.id] || ''}
-                  onChange={(e) => onApiKeyChange(provider.id, e.target.value)}
-                  placeholder={provider.apiKeyPlaceholder}
+                  onChange={() => {}} // Read-only
+                  placeholder={!apiKeys[provider.id] 
+                    ? `Add REACT_APP_${provider.id.toUpperCase()}_API_KEY to .env` 
+                    : provider.apiKeyPlaceholder}
                   darkMode={darkMode}
                   disabled={!isRequired}
+                  readOnly={true}
                 />
               </div>
             )}
