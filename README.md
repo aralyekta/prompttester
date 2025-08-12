@@ -1,5 +1,7 @@
 # PromptTester
 
+![PromptTester](./img/ui.png)
+
 Test and compare LLM prompts across OpenAI, Claude, and Gemini with real-time cost tracking.
 
 ## Features
