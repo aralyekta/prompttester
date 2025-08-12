@@ -42,7 +42,7 @@ REACT_APP_GEMINI_API_KEY=your-gemini-key
 
 ## How It Works
 
-The app uses official SDKs to connect directly to each provider. It automatically handles role conversion between different APIs (e.g., OpenAI's "developer" → Claude's "user") and calculates costs based on each provider's pricing structure.
+The app uses official SDKs to connect directly to each provider. It also calculates costs based on each provider's pricing structure.
 
 ## License
 
