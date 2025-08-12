@@ -27,7 +27,7 @@ npm start
 ```
 
 1. Configure API keys in `.env` file
-2. Create test scenarios
+2. Create test scenarios or use the existing ones in [here](https://github.com/aralyekta/prompttester/tree/master/examples).
 3. Run and compare results
 
 ## Configuration
