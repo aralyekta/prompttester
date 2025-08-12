@@ -59,6 +59,8 @@ const ScenarioCard = ({
     boxSizing: 'border-box',
     outline: 'none',
     fontFamily: theme.typography.fontFamily.sans,
+    opacity: scenario.loading ? 0.6 : 1,
+    cursor: scenario.loading ? 'not-allowed' : 'text',
     '&:focus': {
       borderColor: theme.colors.primary[500],
       background: darkMode
@@ -118,6 +120,7 @@ const ScenarioCard = ({
           onChange={(e) => onUpdate(scenario.id, 'description', e.target.value)}
           style={descriptionInputStyles}
           placeholder="Scenario description"
+          disabled={scenario.loading}
         />
         
         <div style={actionsStyles}>
@@ -159,7 +162,8 @@ const ScenarioCard = ({
           <ConfigSection 
             scenario={scenario} 
             onUpdate={onUpdate} 
-            darkMode={darkMode} 
+            darkMode={darkMode}
+            disabled={scenario.loading}
           />
           
           <MessagesSection
@@ -169,6 +173,7 @@ const ScenarioCard = ({
             onDeleteMessage={onDeleteMessage}
             onUpdateMessageRole={onUpdateMessageRole}
             darkMode={darkMode}
+            disabled={scenario.loading}
           />
 
           {scenario.error && (

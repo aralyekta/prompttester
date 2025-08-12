@@ -3,12 +3,13 @@ import { theme, getThemeStyles } from '../theme';
 import { RobotIcon, TemperatureIcon } from './icons/index.jsx';
 import { Select } from './ui/Input';
 import { ConfigCard } from './ui/Card';
-import { AVAILABLE_MODELS, isGpt5Model } from '../utils/models';
+import { getGroupedModels, isTemperatureSupported } from '../utils/providers';
 
-const ConfigSection = ({ scenario, onUpdate, darkMode }) => {
+const ConfigSection = ({ scenario, onUpdate, darkMode, disabled = false }) => {
   const themeStyles = getThemeStyles(darkMode);
+  const groupedModels = getGroupedModels();
   
-  const temperatureAllowed = !isGpt5Model(scenario.model);
+  const temperatureAllowed = isTemperatureSupported(scenario.model);
   
   const sectionStyles = {
     display: 'grid',
@@ -74,11 +75,16 @@ const ConfigSection = ({ scenario, onUpdate, darkMode }) => {
           value={scenario.model}
           onChange={(e) => onUpdate(scenario.id, 'model', e.target.value)}
           darkMode={darkMode}
+          disabled={disabled}
         >
-          {AVAILABLE_MODELS.map(model => (
-            <option key={model.value} value={model.value}>
-              {model.label}
-            </option>
+          {groupedModels.map(group => (
+            <optgroup key={group.label} label={group.label}>
+              {group.options.map(model => (
+                <option key={model.value} value={model.value}>
+                  {model.label}
+                </option>
+              ))}
+            </optgroup>
           ))}
         </Select>
       </ConfigCard>
@@ -98,6 +104,7 @@ const ConfigSection = ({ scenario, onUpdate, darkMode }) => {
               min="0"
               max="2"
               step="0.1"
+              disabled={disabled}
             />
             <input
               type="number"
@@ -107,6 +114,7 @@ const ConfigSection = ({ scenario, onUpdate, darkMode }) => {
               min="0"
               max="2"
               step="0.1"
+              disabled={disabled}
             />
           </div>
         </ConfigCard>

@@ -1,22 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { theme, getThemeStyles } from './theme';
 import Header from './components/Header';
-import ApiKeySection from './components/ApiKeySection';
+import ApiKeysSection from './components/ApiKeysSection';
 import ToolbarSection from './components/ToolbarSection';
 import ScenarioCard from './components/ScenarioCard';
 import FloatingActions from './components/FloatingActions';
 import ComparisonModal from './components/ComparisonModal';
 import NavigationSidebar from './components/NavigationSidebar';
-import { calculateCost, isGpt5Model } from './utils/models';
+import Toast from './components/Toast';
+import { calculateCost } from './utils/models';
+import { getProviderByModel, validateApiKeys, getRequiredProviders } from './utils/providers';
+import { runLLM } from './utils/llmClients';
 
 const PromptTester = () => {
-  const [apiKey, setApiKey] = useState('');
+  const [apiKeys, setApiKeys] = useState({
+    openai: '',
+    claude: '',
+    gemini: ''
+  });
   const [darkMode, setDarkMode] = useState(false);
   const [comparingScenarios, setComparingScenarios] = useState([]);
   const [showComparisonModal, setShowComparisonModal] = useState(false);
   const [totalSessionCost, setTotalSessionCost] = useState(0);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(250);
+  const [toast, setToast] = useState(null);
   const [scenarios, setScenarios] = useState([
     {
       id: 1,
@@ -76,9 +84,22 @@ const PromptTester = () => {
   };
 
   const updateScenario = (id, field, value) => {
-    setScenarios(scenarios.map(scenario => 
-      scenario.id === id ? { ...scenario, [field]: value } : scenario
-    ));
+    setScenarios(scenarios.map(scenario => {
+      if (scenario.id === id) {
+        const updated = { ...scenario, [field]: value };
+        
+        // If model changed, reset all message roles to 'user'
+        if (field === 'model' && value !== scenario.model) {
+          updated.messages = scenario.messages.map(msg => ({
+            ...msg,
+            role: 'user'
+          }));
+        }
+        
+        return updated;
+      }
+      return scenario;
+    }));
   };
 
   const deleteScenario = (id) => {
@@ -185,37 +206,44 @@ const PromptTester = () => {
   };
 
   const runScenario = async (scenario, abortSignal) => {
-    const requestBody = {
-      model: scenario.model,
-      messages: scenario.messages.filter(msg => msg.content.trim() !== '')
-    };
+    // Get the provider for the model
+    const provider = getProviderByModel(scenario.model);
+    const providerId = provider?.id || 'openai';
+    const apiKey = apiKeys[providerId];
     
-    // Don't include temperature for GPT-5 models
-    if (!isGpt5Model(scenario.model)) {
-      requestBody.temperature = parseFloat(scenario.temperature);
+    // Use the SDK client to run the request
+    try {
+      // Create a promise that rejects on abort
+      const abortPromise = new Promise((_, reject) => {
+        abortSignal.addEventListener('abort', () => {
+          reject(new Error('Request cancelled'));
+        });
+      });
+      
+      // Race between the LLM request and the abort signal
+      const result = await Promise.race([
+        runLLM(scenario, apiKey, providerId),
+        abortPromise
+      ]);
+      
+      return result;
+    } catch (error) {
+      if (error.message === 'Request cancelled') {
+        throw { name: 'AbortError' };
+      }
+      throw error;
     }
-
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify(requestBody),
-      signal: abortSignal
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error?.message || 'API request failed');
-    }
-
-    return response.json();
   };
 
   const runSingleScenario = async (scenarioId) => {
-    if (!apiKey.trim()) {
-      alert('Please enter your OpenAI API key');
+    // Validate required API keys
+    const scenario = scenarios.find(s => s.id === scenarioId);
+    const missingKeys = validateApiKeys([scenario], apiKeys);
+    if (missingKeys.length > 0) {
+      setToast({
+        message: `Please enter API key${missingKeys.length > 1 ? 's' : ''} for: ${missingKeys.join(', ')}`,
+        type: 'error'
+      });
       return;
     }
 
@@ -223,7 +251,6 @@ const PromptTester = () => {
       abortControllersRef.current[scenarioId].abort();
     }
 
-    const scenario = scenarios.find(s => s.id === scenarioId);
     if (!scenario) return;
 
     const abortController = new AbortController();
@@ -267,8 +294,13 @@ const PromptTester = () => {
   };
 
   const runAllScenarios = async () => {
-    if (!apiKey.trim()) {
-      alert('Please enter your OpenAI API key');
+    // Validate all required API keys
+    const missingKeys = validateApiKeys(scenarios, apiKeys);
+    if (missingKeys.length > 0) {
+      setToast({
+        message: `Please enter API key${missingKeys.length > 1 ? 's' : ''} for: ${missingKeys.join(', ')}`,
+        type: 'error'
+      });
       return;
     }
 
@@ -373,7 +405,10 @@ const PromptTester = () => {
           })));
         }
       } catch (error) {
-        alert('Failed to import scenarios. Please check the file format.');
+        setToast({
+          message: 'Failed to import scenarios. Please check the file format.',
+          type: 'error'
+        });
       }
     };
     reader.readAsText(file);
@@ -476,9 +511,10 @@ const PromptTester = () => {
         onToggleTheme={() => setDarkMode(!darkMode)} 
       />
       
-      <ApiKeySection 
-        apiKey={apiKey}
-        onApiKeyChange={setApiKey}
+      <ApiKeysSection 
+        apiKeys={apiKeys}
+        onApiKeyChange={(providerId, value) => setApiKeys(prev => ({...prev, [providerId]: value}))}
+        requiredProviders={getRequiredProviders(scenarios)}
         darkMode={darkMode}
       />
 
@@ -542,6 +578,15 @@ const PromptTester = () => {
             setShowComparisonModal(false);
             setComparingScenarios([]);
           }}
+          darkMode={darkMode}
+        />
+      )}
+      
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
           darkMode={darkMode}
         />
       )}

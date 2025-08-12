@@ -14,7 +14,8 @@ const ResponseSection = ({ response, collapsed, onToggleCollapse, darkMode, scen
   };
   
   const handleCopy = async () => {
-    const content = response.choices[0]?.message?.content || 'No content';
+    // Handle both old format (response.choices) and new format (response.content)
+    const content = response.content || response.choices?.[0]?.message?.content || 'No content';
     try {
       await navigator.clipboard.writeText(content);
       setCopied(true);
@@ -233,7 +234,7 @@ const ResponseSection = ({ response, collapsed, onToggleCollapse, darkMode, scen
       {!collapsed && (
         <div style={bodyStyles}>
           <div style={contentStyles}>
-            {response.choices[0]?.message?.content || 'No content'}
+            {response.content || response.choices?.[0]?.message?.content || 'No content'}
           </div>
           <details style={detailsStyles}>
             <summary style={summaryStyles}>View Raw JSON</summary>

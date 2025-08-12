@@ -335,14 +335,31 @@ const NavigationSidebar = ({ scenarios, onNavigate, darkMode, isCollapsed, onTog
                   <span style={scenarioTitleStyles}>
                     {scenario.description || `Scenario ${index + 1}`}
                   </span>
-                  {!isCollapsed && scenario.cost && (
+                  {!isCollapsed && (
                     <div style={{
-                      fontSize: theme.typography.fontSize.xs,
-                      color: theme.colors.success[600],
-                      fontFamily: theme.typography.fontFamily.mono,
-                      marginTop: '2px'
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '2px',
+                      marginTop: '4px'
                     }}>
-                      {formatCost(scenario.cost.totalCost)}
+                      {scenario.cost && (
+                        <span style={{
+                          fontSize: theme.typography.fontSize.xs,
+                          color: theme.colors.success[600],
+                          fontFamily: theme.typography.fontFamily.mono
+                        }}>
+                          {formatCost(scenario.cost.totalCost)}
+                        </span>
+                      )}
+                      {scenario.model && (
+                        <span style={{
+                          fontSize: theme.typography.fontSize.xs,
+                          color: themeStyles.text.muted,
+                          fontFamily: theme.typography.fontFamily.sans
+                        }}>
+                          {scenario.model}
+                        </span>
+                      )}
                     </div>
                   )}
                 </div>
@@ -397,7 +414,7 @@ const NavigationSidebar = ({ scenarios, onNavigate, darkMode, isCollapsed, onTog
                 title="Jump to response"
               >
                 <div style={responseTextStyles}>
-                  {truncateText(scenario.response.choices[0]?.message?.content)}
+                  {truncateText(scenario.response.content || scenario.response.choices?.[0]?.message?.content || '')}
                 </div>
                 <div style={responseMetaStyles}>
                   {scenario.responseTime && (

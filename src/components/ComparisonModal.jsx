@@ -162,7 +162,7 @@ const ComparisonModal = ({ scenarios, onClose, darkMode }) => {
               
               <div style={responseBoxStyles}>
                 <div style={responseTextStyles}>
-                  {scenario.response?.choices[0]?.message?.content || 'No response'}
+                  {scenario.response?.content || scenario.response?.choices?.[0]?.message?.content || 'No response'}
                 </div>
               </div>
             </div>
