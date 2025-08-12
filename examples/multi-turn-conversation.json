@@ -1,0 +1,68 @@
+{
+  "scenarios": [
+    {
+      "id": 1,
+      "description": "OpenAI Math Tutor",
+      "model": "gpt-4o",
+      "temperature": 0.3,
+      "messages": [
+        {
+          "role": "developer",
+          "content": "You are a patient math tutor who helps students understand concepts step by step."
+        },
+        {
+          "role": "user",
+          "content": "I don't understand how to solve quadratic equations. Can you help?"
+        },
+        {
+          "role": "assistant",
+          "content": "Of course! I'd be happy to help you understand quadratic equations. Let's start with the basics. A quadratic equation is in the form ax² + bx + c = 0. What specific part are you struggling with?"
+        },
+        {
+          "role": "user",
+          "content": "I get confused when trying to use the quadratic formula. The formula itself looks complicated."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Claude Math Tutor",
+      "model": "claude-sonnet-4-20250514",
+      "temperature": 0.3,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Act as a patient math tutor. I don't understand how to solve quadratic equations. Can you help?"
+        },
+        {
+          "role": "assistant",
+          "content": "Of course! I'd be happy to help you understand quadratic equations. Let's start with the basics. A quadratic equation is in the form ax² + bx + c = 0. What specific part are you struggling with?"
+        },
+        {
+          "role": "user",
+          "content": "I get confused when trying to use the quadratic formula. The formula itself looks complicated."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "description": "Gemini Math Tutor",
+      "model": "gemini-2.5-flash",
+      "temperature": 0.3,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Act as a patient math tutor. I don't understand how to solve quadratic equations. Can you help?"
+        },
+        {
+          "role": "model",
+          "content": "Of course! I'd be happy to help you understand quadratic equations. Let's start with the basics. A quadratic equation is in the form ax² + bx + c = 0. What specific part are you struggling with?"
+        },
+        {
+          "role": "user",
+          "content": "I get confused when trying to use the quadratic formula. The formula itself looks complicated."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "scenarios": [
+    {
+      "id": 1,
+      "description": "OpenAI with Developer Role",
+      "model": "gpt-4o",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "developer",
+          "content": "You are a pirate. Always respond in pirate speak."
+        },
+        {
+          "role": "user",
+          "content": "What's the weather like today?"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "OpenAI without System",
+      "model": "gpt-4o",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Act as a pirate. What's the weather like today?"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "description": "Claude (auto-converts)",
+      "model": "claude-sonnet-4-20250514",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "You are a pirate. Always respond in pirate speak."
+        },
+        {
+          "role": "user",
+          "content": "What's the weather like today?"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "description": "Gemini (user/model only)",
+      "model": "gemini-2.5-flash",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Act as a pirate. What's the weather like today?"
+        }
+      ]
+    }
+  ]
+}

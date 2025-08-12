@@ -1,0 +1,40 @@
+{
+  "scenarios": [
+    {
+      "id": 1,
+      "description": "OpenAI Code Gen",
+      "model": "gpt-4o",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Write a Python function to check if a number is prime. Include edge cases and make it efficient."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Claude Code Gen",
+      "model": "claude-opus-4-1-20250805",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Write a Python function to check if a number is prime. Include edge cases and make it efficient."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "description": "Gemini Code Gen",
+      "model": "gemini-2.5-pro",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Write a Python function to check if a number is prime. Include edge cases and make it efficient."
+        }
+      ]
+    }
+  ]
+}

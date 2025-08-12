@@ -1,0 +1,40 @@
+{
+  "scenarios": [
+    {
+      "id": 1,
+      "description": "OpenAI Summary",
+      "model": "gpt-4o-mini",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Summarize the following text in 2-3 sentences:\n\nArtificial intelligence has transformed from a theoretical concept into a practical technology that impacts our daily lives. From voice assistants on our phones to recommendation algorithms on streaming platforms, AI systems are now embedded in countless applications. Machine learning, a subset of AI, enables computers to learn from data without being explicitly programmed for every scenario. Deep learning, which uses neural networks inspired by the human brain, has achieved remarkable breakthroughs in image recognition, natural language processing, and game playing. However, as AI becomes more powerful and ubiquitous, concerns about privacy, bias, job displacement, and the need for ethical guidelines have become increasingly important topics of discussion in both technical and policy circles."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Claude Summary",
+      "model": "claude-sonnet-4-20250514",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Summarize the following text in 2-3 sentences:\n\nArtificial intelligence has transformed from a theoretical concept into a practical technology that impacts our daily lives. From voice assistants on our phones to recommendation algorithms on streaming platforms, AI systems are now embedded in countless applications. Machine learning, a subset of AI, enables computers to learn from data without being explicitly programmed for every scenario. Deep learning, which uses neural networks inspired by the human brain, has achieved remarkable breakthroughs in image recognition, natural language processing, and game playing. However, as AI becomes more powerful and ubiquitous, concerns about privacy, bias, job displacement, and the need for ethical guidelines have become increasingly important topics of discussion in both technical and policy circles."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "description": "Gemini Summary",
+      "model": "gemini-2.5-flash",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Summarize the following text in 2-3 sentences:\n\nArtificial intelligence has transformed from a theoretical concept into a practical technology that impacts our daily lives. From voice assistants on our phones to recommendation algorithms on streaming platforms, AI systems are now embedded in countless applications. Machine learning, a subset of AI, enables computers to learn from data without being explicitly programmed for every scenario. Deep learning, which uses neural networks inspired by the human brain, has achieved remarkable breakthroughs in image recognition, natural language processing, and game playing. However, as AI becomes more powerful and ubiquitous, concerns about privacy, bias, job displacement, and the need for ethical guidelines have become increasingly important topics of discussion in both technical and policy circles."
+        }
+      ]
+    }
+  ]
+}

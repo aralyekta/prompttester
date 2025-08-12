@@ -1,0 +1,64 @@
+{
+  "scenarios": [
+    {
+      "id": 1,
+      "description": "Low Temp (0.2)",
+      "model": "gpt-4o",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Write a creative story opening about a robot who discovers emotions for the first time. Make it exactly 3 sentences."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Medium Temp (0.7)",
+      "model": "gpt-4o",
+      "temperature": 0.7,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Write a creative story opening about a robot who discovers emotions for the first time. Make it exactly 3 sentences."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "description": "High Temp (1.0)",
+      "model": "gpt-4o",
+      "temperature": 1.0,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Write a creative story opening about a robot who discovers emotions for the first time. Make it exactly 3 sentences."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "description": "Claude Low (0.2)",
+      "model": "claude-sonnet-4-20250514",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Write a creative story opening about a robot who discovers emotions for the first time. Make it exactly 3 sentences."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "description": "Claude High (1.0)",
+      "model": "claude-sonnet-4-20250514",
+      "temperature": 1.0,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Write a creative story opening about a robot who discovers emotions for the first time. Make it exactly 3 sentences."
+        }
+      ]
+    }
+  ]
+}

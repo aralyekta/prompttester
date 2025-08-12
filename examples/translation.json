@@ -1,0 +1,40 @@
+{
+  "scenarios": [
+    {
+      "id": 1,
+      "description": "OpenAI Translation",
+      "model": "gpt-4o",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Translate the phrase 'Good morning! How are you today?' into:\n1. French\n2. Spanish\n3. Japanese\n4. German\n5. Italian\n\nProvide the translations in a numbered list."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Claude Translation",
+      "model": "claude-sonnet-4-20250514",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Translate the phrase 'Good morning! How are you today?' into:\n1. French\n2. Spanish\n3. Japanese\n4. German\n5. Italian\n\nProvide the translations in a numbered list."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "description": "Gemini Translation",
+      "model": "gemini-2.5-pro",
+      "temperature": 0.2,
+      "messages": [
+        {
+          "role": "user",
+          "content": "Translate the phrase 'Good morning! How are you today?' into:\n1. French\n2. Spanish\n3. Japanese\n4. German\n5. Italian\n\nProvide the translations in a numbered list."
+        }
+      ]
+    }
+  ]
+}
