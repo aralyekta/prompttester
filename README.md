@@ -1,71 +1,30 @@
 # PromptTester
 
-![PromptTester](./img/example.png)
-
-A modern React application for testing OpenAI API prompts with multiple scenarios, real-time cost tracking, and advanced comparison features.
+Test and compare LLM prompts across OpenAI, Claude, and Gemini with real-time cost tracking.
 
 ## Features
 
-### Core Functionality
-- **Multiple Scenarios**: Create and manage unlimited test scenarios
-- **Multi-Message Conversations**: Support for complex conversation flows with role selection (User, Assistant, Developer)
-- **Model Selection**: Support for all OpenAI models including GPT-4o, GPT-4o-mini, and GPT-5 variants
-- **Temperature Control**: Fine-tune response creativity (automatically hidden for GPT-5 models)
-- **Batch Execution**: Run all scenarios simultaneously or individually
-- **Request Cancellation**: Stop running requests at any time
+- **Multi-Provider**: OpenAI (GPT-4/5), Claude (Opus/Sonnet), Gemini (Pro/Flash)
+- **Batch Testing**: Run multiple scenarios simultaneously
+- **Cost Tracking**: Real-time pricing with token usage
+- **Comparison Mode**: Side-by-side response comparison
+- **Import/Export**: Share scenarios as JSON
 
-### Navigation & UI
-- **Google Docs-style Sidebar**: Resizable navigation panel with scenario overview
-- **Dark/Light Theme**: Professional theme switcher with modern design
-- **Collapsible Sections**: Organize complex scenarios with collapsible UI elements
-- **Status Indicators**: Visual feedback for loading, success, and error states
-- **Floating Action Buttons**: Quick access to add scenarios and run/cancel all
+## Quick Start
 
-### Cost Tracking & Analytics
-- **Real-time Cost Calculation**: Track costs per request and total session cost
-- **Token Usage Display**: Monitor input, output, and cached token consumption
-- **Response Time Metrics**: Measure API response times for performance analysis
-- **Pricing Support**: Accurate pricing for all models including cached token rates
-
-### Advanced Features
-- **Scenario Comparison**: Side-by-side comparison of responses from different scenarios
-- **Export/Import**: Save and load scenario configurations as JSON
-- **Scenario Duplication**: Quickly duplicate existing scenarios for variations
-- **Smooth Navigation**: Click-to-navigate between scenarios with smooth scrolling
-
-## Usage
 ```bash
 npm install
 npm start
 ```
 
-## Setup
-1. Enter your OpenAI API key
-2. Create or import scenarios
-3. Configure model, temperature, and messages for each scenario
-4. Run individual scenarios or execute all at once
-5. Compare responses and track costs
+1. Add your API keys
+2. Create test scenarios
+3. Run and compare results
 
-## Configuration
+## How It Works
 
-### Message Roles
-- **User**: Standard user input
-- **Assistant**: AI assistant responses
-- **Developer**: System-level instructions
+The app uses official SDKs to connect directly to each provider. It automatically handles role conversion between different APIs (e.g., OpenAI's "developer" → Claude's "user") and calculates costs based on each provider's pricing structure.
 
-### Supported Models
-- GPT-4o and GPT-4o-mini
-- GPT-5-preview and GPT-5-turbo (temperature parameter automatically excluded)
-- Custom model pricing with cached token support
+## License
 
-## Export Format
-Scenarios export as JSON including:
-- Model and temperature settings
-- Complete message history with roles
-- Scenario descriptions
-- All configuration parameters
-
-## Keyboard Shortcuts
-- Click scenario in sidebar to navigate
-- Hover effects on all interactive elements
-- Responsive design for various screen sizes
+MIT
