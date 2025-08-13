@@ -1,6 +1,8 @@
 # PromptTester
 
-![PromptTester](./img/ui.png)
+<video controls width="720">
+  <source src="img/promptTester.mp4" type="video/mp4" />
+</video>
 
 Test and compare LLM prompts across OpenAI, Claude, and Gemini with real-time cost tracking.
 
