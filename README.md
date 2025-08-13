@@ -1,7 +1,7 @@
 # PromptTester
 
 <video controls width="720">
-  <source src="img/promptTester.mp4" type="video/mp4" />
+  <source src="https://raw.githubusercontent.com/aralyekta/prompttester/refs/heads/master/img/promptTester.mp4" type="video/mp4" />
 </video>
 
 Test and compare LLM prompts across OpenAI, Claude, and Gemini with real-time cost tracking.
